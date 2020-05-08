@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const bookRouter = require('./routes/books');
 const authRouter = require('./routes/auth');
@@ -12,6 +13,7 @@ dotenv.config();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // ROUTER
 app.use('/books', bookRouter);
