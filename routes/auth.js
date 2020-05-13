@@ -4,6 +4,9 @@ const bcrypt = require('bcryptjs');
 
 // REGISTER
 router.post('/register', async (req, res) => {
+    const emailExist = await User.findOne({ email: req.body.email });
+    if (emailExist) return res.status(400).send("Email is exist");
+
     // hash the password
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(req.body.password, salt);
