@@ -54,7 +54,8 @@ router.put('/:bookId', async(req, res) => {
 router.delete('/:bookId', async(req, res) => {
     try {
         const delBook = await Book.findByIdAndRemove(req.params.bookId);
-        res.send('Delete succcesss');
+        const listBooks = await Book.find();
+        res.send(listBooks);
     } catch (err) {
         res.status(400).send(err);
     }
